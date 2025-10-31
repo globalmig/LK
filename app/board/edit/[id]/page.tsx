@@ -1,27 +1,29 @@
+// app/board/edit/[id]/page.tsx
 "use client";
+
 import Hero from "@/components/Hero";
+import { useParams } from "next/navigation";
 import React from "react";
 
-interface BoardItem {
-  title: string;
-  date: string;
-  description: string;
-  password: string;
-}
+export default function EditPage() {
+  const { id } = useParams<{ id: string }>(); // ← 여기서 id값 받기
 
-export default function Write(item: BoardItem) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const title = formData.get("title");
     const content = formData.get("content");
     const password = formData.get("password");
+
+    // console.log({ id, title, content, password });
+
+    // 여기서 fetch(`/api/board/${id}`, { method: "PUT", body: ... }) 식으로 수정 요청 가능
   };
 
   return (
     <>
       <section>
-        <Hero title={"문의 등록"} subtitle={"궁금하신 점이 있으시면 편하게 문의 남겨주세요."} img={"/img/bg_work_solutions03.jpg"} />
+        <Hero title={"문의 수정"} subtitle={"등록된 문의 내용을 수정할 수 있습니다."} img={"/img/bg_work_solutions03.jpg"} />
       </section>
 
       <section className="mx-auto w-full max-w-[1000px] flex flex-col items-end px-4 gap-5 ">
@@ -49,7 +51,7 @@ export default function Write(item: BoardItem) {
 
           <div className="w-full flex justify-end">
             <button type="submit" className="block py-3 px-5 w-full md:w-32 mt-5 mb-32 text-center border border-slate-400 bg-slate-800 text-white rounded hover:bg-slate-700">
-              등록하기
+              수정하기
             </button>
           </div>
         </form>

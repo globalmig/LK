@@ -1,6 +1,6 @@
 "use client";
 import Hero from "@/components/Hero";
-import PageNation from "@/components/Pagenation";
+import PageNation from "@/components/PageNation";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
@@ -71,7 +71,7 @@ export default function Board() {
 
         <PageNation totalItems={totalItems} itemsPerPage={itemsPerPage} />
 
-        <Link href={"/board/write"} className="block py-4 px-5 w-full md:w-32 mt-5 mb-32 text-center border border-slate-400 bg-slate-800 text-white rounded hover:bg-slate-700">
+        <Link href={"/board/write"} className="block py-3 px-5 w-full md:w-32 mt-5 mb-32 text-center border border-slate-400 bg-slate-800 text-white rounded hover:bg-slate-700">
           문의하기
         </Link>
       </section>

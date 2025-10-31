@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function GNB() {
   const [isSelected, setIsSelected] = useState(false);
@@ -22,21 +23,22 @@ export default function GNB() {
 
   return (
     <div className={`flex justify-between items-center absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px] h-16 white-text py-12 px-4 z-50 ${isSelected ? "bg-slate-800" : "bg-none"}`}>
-      <Link href={"/"} className="text-3xl md:text-3xl font-bold mb-6">
-        LK 관세사무소
+      <Link href={"/"} className="text-3xl md:text-3xl font-bold mb-6 mt-2 md:mt-6">
+        <Image src={"/logo_white.png"} alt="LK관세사무소" width={140} height={40} className="hidden md:block" />
+        <Image src={"/logo_white.png"} alt="LK관세사무소" width={80} height={40} className="md:hidden block" />
       </Link>
       <ul className="md:flex hidden">
         <Link href={"/company"} className="px-6">
           회사소개
         </Link>
         <Link href={"/work"} className="px-6">
-          업무영역
+          업무분야
         </Link>
         <Link href={"/board"} className="px-6">
           상담문의
         </Link>
         <Link href={"/map"} className="px-6">
-          오시는길
+          쟈료실
         </Link>
       </ul>
       <div className="flex md:hidden">
@@ -59,7 +61,7 @@ export default function GNB() {
                 상담문의
               </Link>
               <Link href={"/map"} className="py-8" onClick={toggleMenu}>
-                오시는길
+                자료실
               </Link>
             </ul>
           </>
