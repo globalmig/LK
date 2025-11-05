@@ -65,7 +65,7 @@ export default function Write() {
             <label htmlFor="content" className="font-semibold">
               문의 내용
             </label>
-            <textarea id="content" name="content" className="w-full border border-slate-400 rounded px-3 py-2 h-80" placeholder="문의 상세 내용을 입력하세요" required />
+            <textarea id="content" name="content" className="w-full border border-slate-400 rounded px-3 py-2 h-80" placeholder="문의 상세 내용과 연락처를 꼭! 입력하세요" required />
           </div>
 
           <div className="flex flex-col gap-2">
