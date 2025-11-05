@@ -16,7 +16,7 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
 export default function Slider() {
   return (
-    <div className="h-80 md:h-[640px] transition-transform duration-500 ease-in-out">
+    <div className="relative w-full h-80 md:h-[640px]">
       <Swiper
         slidesPerView={1} // ← 여기!
         spaceBetween={0} // ← 간격 0
@@ -25,7 +25,7 @@ export default function Slider() {
         pagination={{ type: "progressbar" }}
         navigation
         modules={[Navigation, Pagination, Autoplay]}
-        className="mySwiper white-text"
+        className="mySwiper white-text w-full h-full"
       >
         <SwiperSlide className="relative">
           <Image src="/img/bg_slider01.jpg" alt="Slide 1" fill className="object-cover" />

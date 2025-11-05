@@ -38,7 +38,7 @@ export default function GNB() {
           상담문의
         </Link>
         <Link href={"/map"} className="px-6">
-          쟈료실
+          자료실
         </Link>
       </ul>
       <div className="flex md:hidden">

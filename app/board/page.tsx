@@ -1,79 +1,153 @@
 "use client";
 import Hero from "@/components/Hero";
-import PageNation from "@/components/PageNation";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
-
-interface BoardItem {
-  id: number;
-  title: string;
-  date: string;
-}
+import { postAPI, Post } from "@/lib/api";
+import { AxiosError } from "axios";
 
 export default function Board() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const itemsPerPage = 10; // 페이지당 아이템 수
-  const currentPage = Number(searchParams.get("page")) || 1;
+  // 게시글 목록 불러오기
+  const fetchPosts = async (pageNum: number) => {
+    setLoading(true);
+    try {
+      const data = await postAPI.getList(pageNum, 10);
+      console.log("📌 받은 게시글 목록:", data.posts);
 
-  const boardItems: BoardItem[] = [
-    { id: 1, title: "첫 번째 게시글", date: "2024-01-15" },
-    { id: 2, title: "두 번째 게시글", date: "2024-01-16" },
-    { id: 3, title: "세 번째 게시글", date: "2024-01-17" },
-    { id: 4, title: "네 번째 게시글", date: "2024-01-17" },
-    { id: 5, title: "다섯 번째 게시글", date: "2024-01-17" },
-    { id: 6, title: "여섯 번째 게시글", date: "2024-01-17" },
-    { id: 7, title: "일곱 번째 게시글", date: "2024-01-17" },
-    { id: 8, title: "여덟 번째 게시글", date: "2024-01-17" },
-    { id: 9, title: "아홉 번째 게시글", date: "2024-01-17" },
-    { id: 10, title: "열 번째 게시글", date: "2024-01-17" },
-    { id: 11, title: "여섯 번째 게시글", date: "2024-01-17" },
-    { id: 12, title: "일곱 번째 게시글", date: "2024-01-17" },
-    { id: 13, title: "여덟 번째 게시글", date: "2024-01-17" },
-    { id: 14, title: "아홉 번째 게시글", date: "2024-01-17" },
-    { id: 15, title: "열 번째 게시글", date: "2024-01-17" },
-  ];
+      // 🔍 각 게시글의 ID 타입 확인
+      // data.posts?.forEach((post) => {
+      //   console.log(`게시글 "${post.title}" ID:`, post.id, "(타입:", typeof post.id, ")");
+      // });
 
-  const totalItems = boardItems.length;
+      setPosts(data.posts || []);
+      setTotalPages(data.totalPages || 1);
+    } catch (error) {
+      console.error("게시글을 불러오는데 실패했습니다:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // 현재 페이지에 표시할 아이템만 필터링
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = boardItems.slice(startIndex, endIndex);
+  useEffect(() => {
+    fetchPosts(page);
+  }, [page]);
+
+  // 게시글 삭제
+  const handleDelete = async (id: string) => {
+    const password = prompt("비밀번호를 입력하세요:");
+    if (!password) return;
+
+    console.log("🗑️ 삭제 요청 ID:", id);
+
+    try {
+      await postAPI.delete(id, { password });
+      alert("문의가 삭제되었습니다.");
+      fetchPosts(page);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.error || "문의 삭제에 실패했습니다.");
+      } else {
+        alert("문의 삭제에 실패했습니다.");
+      }
+    }
+  };
 
   return (
     <>
       <section>
-        <Hero title={"상담문의"} subtitle={"궁금하신 점이 있으시면 편하게 문의 남겨주세요."} img={"/img/bg_work_solutions03.jpg"} />
+        <Hero title={"문의 게시판"} subtitle={"고객님의 문의사항을 확인하실 수 있습니다."} img={"/img/bg_work_solutions03.jpg"} />
       </section>
 
-      <section className="mx-auto w-full max-w-[1000px] flex flex-col items-end px-4 gap-5">
-        <table className="w-full mt-10 table-auto border-collapse border border-slate-400 text-center">
-          <thead className="bg-slate-600 text-white text-lg">
-            <tr>
-              <th className="border border-slate-300 px-4 py-3 w-[80px]">No</th>
-              <th className="border border-slate-300 px-4 py-3 w-[80%]">제목</th>
-              <th className="border border-slate-300 px-4 py-3 w-[200px]">날짜</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((item) => (
-              <tr key={item.id} className="cursor-pointer hover:bg-gray-100" onClick={() => router.push(`/board/${item.id}`)}>
-                <td className="border border-slate-300 px-4 py-4">{item.id}</td>
-                <td className="border border-slate-300 px-4 py-4 text-left">{item.title}</td>
-                <td className="border border-slate-300 px-4 py-4">{item.date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <section className="mx-auto w-full max-w-[1000px] px-4 py-10">
+        <div className="flex justify-end mb-6">
+          <Link href="/board/write" className="py-2 px-6 bg-slate-800 text-white rounded hover:bg-slate-700 transition-colors">
+            문의 작성
+          </Link>
+        </div>
 
-        <PageNation totalItems={totalItems} itemsPerPage={itemsPerPage} />
+        {loading ? (
+          <div className="text-center py-20">
+            <p className="text-gray-600">불러오는 중...</p>
+          </div>
+        ) : posts.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-gray-600">등록된 문의가 없습니다.</p>
+          </div>
+        ) : (
+          <>
+            {/* 게시글 목록 */}
+            <div className="space-y-4 mb-10">
+              {posts.map((post) => (
+                <Link href={`/board/${post.id}`} prefetch={false} className="text-blue-600 hover:text-blue-800" onClick={() => console.log("🔗 링크 클릭, 이동할 ID:", post.id)}>
+                  <div key={post.id} className="p-6 border border-slate-300 rounded-lg hover:shadow-lg transition-shadow">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-lg font-semibold text-slate-800">{post.title}</h3>
+                      {/* <span className="text-sm text-gray-500">조회 {post.views}</span> */}
+                    </div>
 
-        <Link href={"/board/write"} className="block py-3 px-5 w-full md:w-32 mt-5 mb-32 text-center border border-slate-400 bg-slate-800 text-white rounded hover:bg-slate-700">
-          문의하기
-        </Link>
+                    {/* <p className="text-gray-700 mb-4 line-clamp-2">{post.content}</p> */}
+
+                    {/* 🔍 디버깅: ID 값 표시 */}
+                    {/* <p className="text-xs text-gray-400 mb-2">ID: {post.id}</p> */}
+
+                    <div className="flex justify-between items-center text-sm text-gray-500">
+                      <span>
+                        {new Date(post.created_at).toLocaleDateString("ko-KR", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                      <div className="flex gap-2">
+                        상세보기
+                        {/* <button onClick={() => handleDelete(post.id)} className="text-red-600 hover:text-red-800">
+                        삭제
+                      </button> */}
+                      </div>
+                    </div>
+                  </div>{" "}
+                </Link>
+              ))}
+            </div>
+
+            {/* 페이지네이션 */}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mb-32">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="px-4 py-2 border border-slate-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-100"
+                >
+                  이전
+                </button>
+
+                <div className="flex gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                    <button
+                      key={pageNum}
+                      onClick={() => setPage(pageNum)}
+                      className={`px-4 py-2 border rounded ${page === pageNum ? "bg-slate-800 text-white border-slate-800" : "border-slate-400 hover:bg-slate-100"}`}
+                    >
+                      {pageNum}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="px-4 py-2 border border-slate-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-100"
+                >
+                  다음
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </section>
     </>
   );

@@ -4,7 +4,10 @@ import Slider from "@/components/Slider";
 import Work from "@/components/Work";
 import React from "react";
 
+
+
 export default function main() {
+  
   return (
     <div>
       <section>

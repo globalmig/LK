@@ -1,21 +1,49 @@
 "use client";
+
 import Hero from "@/components/Hero";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { postAPI } from "@/lib/api";
 
-interface BoardItem {
-  title: string;
-  date: string;
-  description: string;
-  password: string;
-}
+export default function Write() {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-export default function Write(item: BoardItem) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return; // 더블 클릭 방지
+
     const formData = new FormData(e.currentTarget);
-    const title = formData.get("title");
-    const content = formData.get("content");
-    const password = formData.get("password");
+    const title = formData.get("title") as string | null;
+    const content = formData.get("content") as string | null;
+    const password = formData.get("password") as string | null;
+
+    if (!title || !content || !password) {
+      alert("제목, 내용, 비밀번호를 모두 입력해주세요.");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      // ✅ 실제 API 호출
+      const newPost = await postAPI.create({
+        title,
+        content,
+        password,
+      });
+
+      alert("문의가 등록되었습니다.");
+
+      // ✅ 글 상세 페이지로 이동 (라우트에 맞게 수정)
+      router.push(`/board/${newPost.id}`);
+      // 또는 목록으로 가고 싶으면: router.push("/board");
+    } catch (error) {
+      console.error(error);
+      alert("문의 등록 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -48,8 +76,12 @@ export default function Write(item: BoardItem) {
           </div>
 
           <div className="w-full flex justify-end">
-            <button type="submit" className="block py-3 px-5 w-full md:w-32 mt-5 mb-32 text-center border border-slate-400 bg-slate-800 text-white rounded hover:bg-slate-700">
-              등록하기
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="block py-3 px-5 w-full md:w-32 mt-5 mb-32 text-center border border-slate-400 bg-slate-800 text-white rounded hover:bg-slate-700 disabled:opacity-60"
+            >
+              {isSubmitting ? "등록중..." : "등록하기"}
             </button>
           </div>
         </form>

@@ -12,7 +12,7 @@ export default function Map() {
       </section>
       <section className="flex flex-col justify-center items-center mb-40 gap-4">
         <h2>관련 자료를 확인해 보세요</h2>
-        <a href="https://blog.naver.com/lek9740">
+        <a href="https://blog.naver.com/lek9740" target="_blank" rel="noopener noreferrer">
           <div className="flex flex-col justify-center items-center gap-4">
             <Image src={"/img/blog.webp"} width={100} height={100} alt={"블로그아이콘"} className="rounded-md" priority />
             <p className="text-sm  text-green-600/80">아이콘을 선택하면 이동합니다.</p>
