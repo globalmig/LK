@@ -28,7 +28,7 @@ export default function Slider() {
         className="mySwiper white-text w-full h-full"
       >
         <SwiperSlide className="relative">
-          <Image src="/img/bg_slider01.jpg" alt="Slide 1" fill priority className="object-cover" />
+          <Image src="/img/bg_slider01.jpg" alt="Slide 1" fill priority sizes="100vw" quality={85} className="object-cover" />
           <div className="bg-black/40 w-full h-full absolute"></div>
           <div className="relative px-4 break-keep">
             <h2>소수 고객 집중 관리 관세 파트너, LK관세사무소</h2>
@@ -36,7 +36,7 @@ export default function Slider() {
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">
-          <Image src="/img/bg_slider02.jpg" alt="Slide 3" fill priority className="object-cover" />
+          <Image src="/img/bg_slider02.jpg" alt="Slide 3" fill priority sizes="100vw" quality={85} className="object-cover" />
           <div className="bg-black/40 w-full h-full absolute"></div>
           <div className="relative px-4 break-keep">
             <h2>복잡한 통관 절차, 믿을 수 있는 전문가와 함께하세요.</h2>
@@ -44,7 +44,7 @@ export default function Slider() {
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">
-          <Image src="/img/bg_slider03.jpg" alt="Slide 3" fill priority className="object-cover" />
+          <Image src="/img/bg_slider03.jpg" alt="Slide 3" fill priority sizes="100vw" quality={85} className="object-cover" />
           <div className="bg-black/40 w-full h-full absolute"></div>
           <div className="relative px-4 break-keep">
             <h2>수출입 절차, 믿을 수 있는 전문가와 함께하세요.</h2>
