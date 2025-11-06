@@ -99,7 +99,7 @@ export default function WorkPage() {
           <div className="px-4">
             <div className="border-l-8 border-sky-700 my-0 md:my-20 pl-8">
               <h2>수출통관 절차</h2>
-              <p className="text-black/50">LK Customs Service</p>
+              <p className="text-black/50">Export Customs Clearance Process</p>
             </div>
 
             <div className="relative w-full h-[450px] md:h-[600px]">
@@ -135,7 +135,7 @@ export default function WorkPage() {
           <div className="px-4">
             <div className="border-l-8 border-sky-700 my-0 md:my-20 pl-8">
               <h2>수입통관 절차</h2>
-              <p className="text-black/50">LK Customs Service</p>
+              <p className="text-black/50">Import Customs Clearance Process</p>
             </div>
 
             <div className="relative w-full h-[450px] md:h-[600px]">
