@@ -99,7 +99,7 @@ export default function WorkPage() {
           <div className="px-4">
             <div className="border-l-8 border-sky-700 my-0 md:my-20 pl-8">
               <h2>수출통관 절차</h2>
-              <p className="text-black/50">Export Customs Clearance Process</p>
+              <p className="text-black/50">LK Customs Service</p>
             </div>
 
             <div className="relative w-full h-[450px] md:h-[600px]">
@@ -135,7 +135,7 @@ export default function WorkPage() {
           <div className="px-4">
             <div className="border-l-8 border-sky-700 my-0 md:my-20 pl-8">
               <h2>수입통관 절차</h2>
-              <p className="text-black/50">Import Customs Clearance Process</p>
+              <p className="text-black/50">LK Customs Service</p>
             </div>
 
             <div className="relative w-full h-[450px] md:h-[600px]">
@@ -179,7 +179,7 @@ LK 관세사무소는 이러한 FTA 협정을 통해 고객사가 수출입 거�
 
             <ul className="border-2 p-10 md:px-24 my-10 rounded-xl list-disc leading-loose gap-6 flex flex-col break-keep">
               <li>
-                <strong>수출 단계</strong>에서는 고객사가 FTA 협정의 혜택을 받기위해 원산지증명서를 발행하는 과정에서 모든 법적·제도적 조건을 충분히 활용할수 있도록 지원합니다.
+                <strong>수출 단계</strong>에서는 고객사가 FTA 협정의 혜택을 받기위해 원산지증명서를 발행하는 과정에서 모든 법적·제도적 조건을 충분히 활용할 수 있도록 지원합니다.
               </li>
               <li>
                 <strong>수입 단계</strong>에서는 고객사가 상대국의 원산지증명서를 취득해 관세를 절감할수 있도록 컨설팅을 제공합니다.
