@@ -26,6 +26,7 @@ export default function company() {
             "원산지관리사 자격증 취득",
             "前 ○○관세법인 근무",
             "現 LK 관세사무소 대표 관세사",
+            "한국관세사회 과세가격심사 전문관세사",
           ]}
           imgSrc={"/img/프로필사진.jpg"}
         />
