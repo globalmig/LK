@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     // 게시글 목록 조회 (비밀번호 제외)
     const { data, error } = await supabase
       .from("posts")
-      .select("id, title, content, created_at, updated_at, views")
+      .select("id, title, content, contact,  created_at, updated_at, views")
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
@@ -36,9 +36,9 @@ export async function GET(request: NextRequest) {
 // 게시글 생성
 export async function POST(request: NextRequest) {
   try {
-    const { title, content, password } = await request.json();
+    const { title, content, password, contact } = await request.json();
 
-    if (!title || !content || !password) {
+    if (!title || !content || !contact || !password) {
       return NextResponse.json({ error: "제목, 내용, 비밀번호를 모두 입력해주세요." }, { status: 400 });
     }
 
@@ -51,10 +51,11 @@ export async function POST(request: NextRequest) {
         {
           title,
           content,
+          contact,
           password_hash: passwordHash,
         },
       ])
-      .select("id, title, content, created_at, updated_at, views")
+      .select("id, title, contact, content, created_at, updated_at, views")
       .single();
 
     if (error) throw error;

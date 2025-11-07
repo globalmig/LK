@@ -40,6 +40,7 @@ api.interceptors.response.use(
 
 // 타입 정의
 export type Post = {
+  contact: string;
   id: string;
   title: string;
   content: string;
@@ -58,12 +59,14 @@ export type PostListResponse = {
 export type CreatePostRequest = {
   title: string;
   content: string;
+  contact: string;
   password: string;
 };
 
 export type UpdatePostRequest = {
   title: string;
   content: string;
+  contact: string;
   password: string;
 };
 

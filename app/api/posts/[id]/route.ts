@@ -98,7 +98,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-    const { data: post, error } = await supabase.from("posts").select("id, title, content, created_at, updated_at, views, password_hash").eq("id", id).single();
+    const { data: post, error } = await supabase.from("posts").select("id, title, content, contact,created_at, updated_at, views, password_hash").eq("id", id).single();
 
     if (error || !post) {
       return NextResponse.json({ error: "게시글을 찾을 수 없습니다." }, { status: 404 });
@@ -134,7 +134,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
   const { id } = params;
 
   try {
-    const { title, content, password } = await request.json();
+    const { title, content, password, contact } = await request.json();
 
     if (!title || !content || !password) {
       return NextResponse.json({ error: "제목, 내용, 비밀번호를 모두 입력해주세요." }, { status: 400 });
@@ -168,10 +168,11 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
       .update({
         title,
         content,
+        contact,
         updated_at: new Date().toISOString(),
       })
       .eq("id", id)
-      .select("id, title, content, created_at, updated_at, views")
+      .select("id, title, content, created_at, updated_at, views, contact")
       .single();
 
     if (updateError) {

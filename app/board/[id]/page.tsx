@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface Post {
+  contact: string;
   id: string;
   title: string;
   content: string;
@@ -128,6 +129,11 @@ export default function Page({ params }: { params: { id: string } }) {
 
           <div className="border-t pt-10 pb-60">
             <p className="whitespace-pre-line break-keep">{post.content}</p>
+          </div>
+
+          <div className="border-t pt-10 pb-20 flex">
+            <p className="font-bold">연락처: </p>
+            <p className="whitespace-pre-line break-keep ml-4">{post.contact}</p>
           </div>
 
           <div className="w-full flex justify-end gap-4 md:flex-row flex-col mt-5 mb-32">

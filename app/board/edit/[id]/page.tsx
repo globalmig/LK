@@ -16,6 +16,7 @@ export default function EditPage({ params }: { params: { id: string } }) {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
+    contact: "",
     password: "",
   });
 
@@ -30,6 +31,7 @@ export default function EditPage({ params }: { params: { id: string } }) {
         setFormData({
           title: data.title,
           content: data.content,
+          contact: data.contact,
           password: "",
         });
       } catch (error: any) {
@@ -62,6 +64,7 @@ export default function EditPage({ params }: { params: { id: string } }) {
       await postAPI.update(id, {
         title: formData.title,
         content: formData.content,
+        contact: formData.contact,
         password: formData.password,
       });
 
@@ -137,6 +140,13 @@ export default function EditPage({ params }: { params: { id: string } }) {
               disabled={submitting}
               required
             />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="contact" className="font-semibold">
+              연락처
+            </label>
+            <input id="contact" name="contact" className="w-full border border-slate-400 rounded px-3 py-2 " placeholder="문의 답변 받으실 연락처를 입력하세요" required />
           </div>
 
           <div className="flex flex-col gap-2">

@@ -10,7 +10,6 @@ export default function company() {
     <>
       <section>
         <Hero title={"회사소개"} subtitle={"소수 관리 LK 관세사무소입니다."} img={"/img/bg_work_search.jpg"} priority />
-        {/* TODO: 회사 소개 */}
       </section>
 
       <section className="">
@@ -46,10 +45,14 @@ export default function company() {
           <h2 className="leading-snug text-3xl md:text-4xl border-l-4 px-4 mb-10 md:mb-20">많은 고객보다, 소수만 맡아 대표가 직접 책임지겠습니다.</h2>
 
           <pre className="whitespace-pre-wrap break-words text-base sm:text-[17px] md:text-lg leading-relaxed md:leading-8 text-white/90 tracking-wide  mx-auto md:mx-0 w-full">
-            LK 관세사무소는 규모의 확장을 목표로 하지 않습니다. 대신, 맡은 고객사 한 분, 한 분의 통관 관련 업무를 대표 관세사가 직접 책임지고 수행하겠습니다.
+            LK 관세사무소는 규모의 확장을 목표로 하지 않습니다.
+            {"\n\n"}대신, 맡은 고객사 한 분, 한 분의 통관 관련 업무를 대표 관세사가 직접 책임지고 수행하겠습니다.
             {"\n\n"}
-            업무를 직원에게 분배하기보다, 수출입 전 과정에서 발생할 수 있는 모든 변수들을 제가 직접 처리하고 해결하겠습니다. 통관 업무는 단순한 행정 절차가 아닙니다. 통관 업무는 기업의 물류와 비용,
-            신뢰와 직결된 중요한 과정임을 항상 염두에 두고 고객사의 일을 제가 직접 책임지고 처리하겠습니다.
+            {"\n\n"}
+            업무를 직원에게 분배하기보다, 수출입 전 과정에서 발생할 수 있는 모든 변수들을 제가 직접 처리하고 해결하겠습니다.
+            {"\n\n"}통관 업무는 단순한 행정 절차가 아닙니다.
+            {"\n\n"}통관 업무는 기업의 물류와 비용, 신뢰와 직결된 중요한 과정임을 항상 염두에 두고 고객사의 일을 제가 직접 책임지고 처리하겠습니다.
+            {"\n\n"}
             {"\n\n"}
             LK 관세사무소는 대형 법인처럼 화려하지는 않지만, 언제나 고객사의 입장에서 업무를 수행하고 끝까지 책임지는 관세 파트너가 되겠습니다.
             {"\n\n"}

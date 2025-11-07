@@ -16,10 +16,11 @@ export default function Write() {
     const formData = new FormData(e.currentTarget);
     const title = formData.get("title") as string | null;
     const content = formData.get("content") as string | null;
+    const contact = formData.get("contact") as string | null;
     const password = formData.get("password") as string | null;
 
-    if (!title || !content || !password) {
-      alert("제목, 내용, 비밀번호를 모두 입력해주세요.");
+    if (!title || !content || !contact || !password) {
+      alert("제목, 내용, 연락처, 비밀번호를 모두 입력해주세요.");
       return;
     }
 
@@ -30,6 +31,7 @@ export default function Write() {
       const newPost = await postAPI.create({
         title,
         content,
+        contact,
         password,
       });
 
@@ -65,7 +67,14 @@ export default function Write() {
             <label htmlFor="content" className="font-semibold">
               문의 내용
             </label>
-            <textarea id="content" name="content" className="w-full border border-slate-400 rounded px-3 py-2 h-80" placeholder="문의 상세 내용과 연락처를 꼭! 입력하세요" required />
+            <textarea id="content" name="content" className="w-full border border-slate-400 rounded px-3 py-2 h-80" placeholder="문의 상세 내용을 입력하세요" required />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="contact" className="font-semibold">
+              연락처
+            </label>
+            <input id="contact" name="contact" className="w-full border border-slate-400 rounded px-3 py-2 " placeholder="문의 답변 받으실 연락처를 입력하세요" required />
           </div>
 
           <div className="flex flex-col gap-2">
