@@ -165,9 +165,9 @@ export default function WorkPage() {
           <Figure01
             direction="left"
             title="FTA 컨설팅이란?"
-            description="우리나라는 전세계 국가들과 활발히 자유무역협정(FTA)을 체결하여 현재 발효된 FTA는 22건, 59개국입니다.
-LK 관세사무소는 이러한 FTA 협정을 통해 고객사가 수출입 거래에서 최대한의 관세 혜택을 누릴수 있도록 전문적인 컨설팅을 제공합니다.
-"
+            description={`우리나라는 전세계 국가들과 활발히 자유무역협정(FTA)을 체결하여 현재 발효된 FTA는 22건, 59개국입니다.
+            \nLK 관세사무소는 이러한 FTA 협정을 통해 고객사가 수출입 거래에서 최대한의 관세 혜택을 누릴수 있도록 전문적인 컨설팅을 제공합니다.
+`}
             imgSrc="/img/country.png"
           />
 

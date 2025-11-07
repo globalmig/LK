@@ -31,8 +31,8 @@ export default function Slider() {
           <Image src="/img/bg_slider01.jpg" alt="Slide 1" fill priority sizes="100vw" quality={85} className="object-cover" />
           <div className="bg-black/40 w-full h-full absolute"></div>
           <div className="relative px-4 break-keep">
-            <h2>소수 고객 집중 관리 관세 파트너, LK관세사무소</h2>
-            <p>고객의 성공이 곧 우리의 성공입니다.</p>
+            <h2>대표 관세사가 직접 수행·책임, LK 관세사무소 </h2>
+            <p>사업 규모가 아니라, 소수만 맡아 끝까지 책임집니다.</p>
           </div>
         </SwiperSlide>
         <SwiperSlide className="relative">

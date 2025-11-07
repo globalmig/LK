@@ -24,14 +24,18 @@ export default function Figure02(item: Figure01Props) {
           <h3 className="text-2xl md:text-4xl  leading-snug">
             <strong className="text-cyan-800">이은경</strong> 대표 관세사
           </h3>
-          <p className="text-4xl my-5 mb-10 font-bold text-black/20">Profile</p>
-          <div className="w-10 h-[0.4px] mx-auto mb-12 bg-black/20"></div>
+          <p className="text-4xl m-5 mb-10 font-bold text-black/20">Profile</p>
+          <div className="w-10 h-[0.4px] mx-auto mb-6 bg-black/20"></div>
           {/* 배열이면 리스트, 아니면 문단 */}
           {Array.isArray(item.description) ? (
-            <ul className="list-disc list-inside space-y-8 text-lg text-center">
+            <ul className="list-disc list-inside text-lg text-center">
               {item.description.map((desc, i) => (
-                <li key={i}>{desc}</li>
+                <li key={i} className="mt-4">
+                  {desc}
+                </li>
               ))}
+              <p className="p-0 m-0">- 전문분야: 수출입통관</p>
+              <p className="p-0 m-0">- 이전가격심사 전문관세사</p>
             </ul>
           ) : (
             <pre className="whitespace-pre-wrap break-words leading-relaxed text-lg">{item.description}</pre>
