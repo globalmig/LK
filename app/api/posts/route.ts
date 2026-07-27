@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { d1Query } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 // 게시글 목록 조회
@@ -11,22 +11,20 @@ export async function GET(request: NextRequest) {
 
   try {
     // 전체 개수 조회
-    const { count } = await supabase.from("posts").select("*", { count: "exact", head: true });
+    const countRows = await d1Query<{ count: number }>("SELECT COUNT(*) as count FROM posts");
+    const count = countRows[0]?.count ?? 0;
 
     // 게시글 목록 조회 (비밀번호 제외)
-    const { data, error } = await supabase
-      .from("posts")
-      .select("id, title, content, contact,  created_at, updated_at, views")
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    if (error) throw error;
+    const data = await d1Query(
+      "SELECT id, title, content, contact, created_at, updated_at, views FROM posts ORDER BY created_at DESC LIMIT ? OFFSET ?",
+      [limit, offset]
+    );
 
     return NextResponse.json({
       posts: data,
       total: count,
       page,
-      totalPages: Math.ceil((count || 0) / limit),
+      totalPages: Math.ceil(count / limit),
     });
   } catch (error) {
     return NextResponse.json({ error: "게시글을 불러오는데 실패했습니다." }, { status: 500 });
@@ -45,22 +43,18 @@ export async function POST(request: NextRequest) {
     // 비밀번호 해시화
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const { data, error } = await supabase
-      .from("posts")
-      .insert([
-        {
-          title,
-          content,
-          contact,
-          password_hash: passwordHash,
-        },
-      ])
-      .select("id, title, contact, content, created_at, updated_at, views")
-      .single();
+    const id = crypto.randomUUID();
+    const now = new Date().toISOString();
 
-    if (error) throw error;
+    await d1Query(
+      "INSERT INTO posts (id, title, content, contact, password_hash, created_at, updated_at, views) VALUES (?, ?, ?, ?, ?, ?, ?, 0)",
+      [id, title, content, contact, passwordHash, now, now]
+    );
 
-    return NextResponse.json(data, { status: 201 });
+    return NextResponse.json(
+      { id, title, content, contact, created_at: now, updated_at: now, views: 0 },
+      { status: 201 }
+    );
   } catch (error) {
     return NextResponse.json({ error: "게시글 작성에 실패했습니다." }, { status: 500 });
   }
