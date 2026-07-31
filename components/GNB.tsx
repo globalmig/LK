@@ -37,9 +37,18 @@ export default function GNB() {
         <Link href={"/board"} className="px-6">
           상담문의
         </Link>
-        <Link href={"/map"} className="px-6">
-          자료실
-        </Link>
+        <li className="group relative px-6 list-none">
+          <Link href={"/map"} className="block">
+            자료실
+          </Link>
+          <ul className="absolute left-1/2 -translate-x-1/2 top-full pt-3 hidden group-hover:block whitespace-nowrap">
+            <li className="bg-slate-800 rounded-md shadow-lg">
+              <Link href={"/map#sbs-biz-video"} className="block px-4 py-3 text-sm hover:bg-slate-700 rounded-md">
+                LK 관세사무소 SBS 비즈 출연 영상
+              </Link>
+            </li>
+          </ul>
+        </li>
       </ul>
       <div className="flex md:hidden">
         <button className="flex flex-col gap-1 white-text" onClick={toggleMenu} aria-label="Toggle Menu">
@@ -62,6 +71,9 @@ export default function GNB() {
               </Link>
               <Link href={"/map"} className="py-8" onClick={toggleMenu}>
                 자료실
+              </Link>
+              <Link href={"/map#sbs-biz-video"} className="pb-8 text-sm text-white/70" onClick={toggleMenu}>
+                ㄴ LK 관세사무소 SBS 비즈 출연 영상
               </Link>
             </ul>
           </>
