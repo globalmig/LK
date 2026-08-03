@@ -40,7 +40,7 @@ export default function GNB() {
         <Link href={"/map"} className="px-6">
           자료실
         </Link>
-        <Link href={"/map#sbs-biz-video"} className="px-6 whitespace-nowrap">
+        <Link href={"/media"} className="px-6 whitespace-nowrap">
           LK 관세사무소 SBS 비즈 출연 영상
         </Link>
       </ul>
@@ -66,7 +66,7 @@ export default function GNB() {
               <Link href={"/map"} className="py-8" onClick={toggleMenu}>
                 자료실
               </Link>
-              <Link href={"/map#sbs-biz-video"} className="py-8" onClick={toggleMenu}>
+              <Link href={"/media"} className="py-8" onClick={toggleMenu}>
                 LK 관세사무소 SBS 비즈 출연 영상
               </Link>
             </ul>
