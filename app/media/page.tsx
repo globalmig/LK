@@ -5,7 +5,7 @@ export default function Media() {
   return (
     <>
       <section className="mb-40">
-        <Hero title={"SBS 비즈 출연영상"} subtitle={"LK 관세사무소가 SBS Biz에 소개된 영상을 확인해보세요"} img={"/img/bg_work_solutions04.jpg"} priority />
+        <Hero title={"SBS 비즈 출연영상"} subtitle={"LK 관세사무소가 SBS Biz에 소개된 영상을 확인해보세요"} img={"/img/bg_work_solutions02.jpg"} priority />
       </section>
       <section className="flex flex-col justify-center items-center mb-40 gap-4 max-w-[1440px] mx-auto px-4">
         <div className="flex flex-col items-center gap-2 mb-2 text-center">
